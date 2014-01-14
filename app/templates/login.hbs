@@ -1,0 +1,14 @@
+<div class="zooniverse-profile">
+  <form class="sign-in-form">
+    <div class="loader"></div>
+    {{translate 'header' 'profile.signInForProfile'}}
+    <label><input type="text" name="username" required="required" placeholder="{{translate 'profile.username'}}" /></label>
+    <label><input type="password" name="password" required="required" placeholder="{{translate 'profile.password'}}" /></label>
+    <div class="error-message"></div>
+    <div class="action"><button type="submit">{{translate 'span' 'profile.signIn'}}</button></div>
+    <p class="no-account">
+      {{translate 'span' 'profile.noAccount'}}
+      <button name="sign-up">{{translate 'button' 'profile.signUp'}}</button>
+    </p>
+  </form>
+</div>

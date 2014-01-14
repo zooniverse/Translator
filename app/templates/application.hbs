@@ -1,0 +1,13 @@
+<div class="container">
+  <nav>
+    <div class="row">
+      <h1 class="logo">{{#linkTo 'index'}}{{translate 'span' 'home.project'}}{{/linkTo}}</h1>
+      <div class="clearfix visible-sm visible-xs"></div>
+      <div class="links">
+        {{#linkTo 'example'}}{{translate 'span' 'home.example'}}{{/linkTo}}
+      </div>
+    </div>
+  </nav>
+  
+  {{outlet}}
+</div>
