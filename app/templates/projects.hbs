@@ -1,0 +1,11 @@
+<div class="projects container">
+  <h1 class="row">Translate Projects:</h1>
+  
+  <div class="list row">
+    {{#each model}}
+      <div {{bind-attr class=":project isTranslator::disabled"}}>
+        {{link-to display_name "project" this classNames="button"}}
+      </div>
+    {{/each}}
+  </div>
+</div>

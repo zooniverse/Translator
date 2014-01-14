@@ -1,18 +1,17 @@
 {
-  "name": "Ember-App",
-  "description": "A sample ember app",
+  "name": "Translator",
+  "description": "Zooniverse Translations",
   "author": "Zooniverse <support@zooniverse.org>",
   "version": "0.0.1",
   "scripts": {
     "start": "haw serve",
-    "stage": "haw build && publisssh build demo.zooniverse.org/ember-app && rm -rf build"
+    "stage": "haw build && publisssh build demo.zooniverse.org/translator && rm -rf build"
   },
   "dependencies": {
     "haw": "~0.2.17",
     "zooniverse": "0.3.11",
     "publisssh": "~0.2.3",
     "webmake-ember-handlebars": "~0.1.4",
-    "webmake-coffee": "~0.1.3",
-    "t7e": "~0.2.3"
+    "webmake-coffee": "~0.1.3"
   }
 }

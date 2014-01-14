@@ -1,3 +1,4 @@
 require './authenticated'
 require './login'
-require './example'
+require './projects'
+require './project'

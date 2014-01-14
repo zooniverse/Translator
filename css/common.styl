@@ -1,0 +1,23 @@
+unselectable()
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+button()
+  unselectable()
+  display: inline-block
+  padding: 5px 10px
+  box-shadow: 0 0 1px 1px #333333
+  font-size: 16px
+  color: #333333
+  text-align: center
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  cursor: pointer
+  
+  &:active
+    box-shadow: 0 0 0 1px #333333
+    background-color: #EAEAEA

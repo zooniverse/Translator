@@ -3,7 +3,7 @@ webmakeEco = require './node_modules/haw/lib/webmake-eco'
 webmakeHandlebars = require 'webmake-ember-handlebars'
 
 module.exports = ->
-  @port = 9294
+  @port = 9295
   
   @compile['.coffee']['.js'] = (sourceFile, options, callback) ->
     webmake sourceFile,

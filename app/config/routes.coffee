@@ -1,3 +1,4 @@
 App.Router.map ->
   @route 'login'
-  @route 'example'
+  @resource 'projects'
+  @resource 'project', path: '/projects/:id'
