@@ -1,4 +1,11 @@
 <div class="projects container">
   <h1 class="row">{{display_name}}</h1>
-  
+  {{#each field in model.translation.paths}}
+    <div class="field">
+      <span class="label">{{field.path}}</span><br />
+      original: <span class="english">{{field.seed.text}}</span><br />
+      translated: <span class="translated">{{field.seed.translated}}</span><br />
+      <br />
+    </div>
+  {{/each}}
 </div>

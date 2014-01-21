@@ -12,6 +12,10 @@ App.Project = DS.Model.extend
   isTranslator: (->
     'translator' in @get('userRoles')
   ).property('userRoles')
+  
+  translation: (->
+    @store.find('translation', @get('id'))
+  ).property('id')
 
 App.ProjectAdapter = App.ZooniverseAdapter.extend
   find: (store, type, id) ->
@@ -23,6 +27,6 @@ App.ProjectAdapter = App.ZooniverseAdapter.extend
 App.ProjectSerializer = App.ApplicationSerializer.extend
   normalize: (type, hash) ->
     hash.id = hash.name
-    hash = @_super type, hash
+    @_super type, hash
 
 module.exports = App.Project
