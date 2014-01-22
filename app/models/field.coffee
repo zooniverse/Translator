@@ -1,8 +1,18 @@
 module.exports = App.Field = DS.Model.extend
-  init: (hash) ->
-    @set(key, value) for key, value of hash
-    @set 'locales', Object.keys @get('translations')
-    @set 'seed', @translations[@get('seedLocale')]
+  seedLocale: DS.attr()
+  locale: DS.attr()
+  path: DS.attr()
+  translation_id: DS.attr()
+  translations: DS.attr('object')
+  translation: DS.belongsTo('translation')
+  
+  locales: (->
+    Object.keys @getWithDefault('translations', { })
+  ).property('translations')
+  
+  seed: (->
+    @get('translations')[@get('seedLocale')]
+  ).property('translations', 'seedLocale')
   
   version: (->
     @get('seed').version

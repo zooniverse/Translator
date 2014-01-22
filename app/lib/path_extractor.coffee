@@ -1,9 +1,11 @@
 Field = require '../models/field'
 
 class PathExtractor
-  constructor: (@seedLocale, json, @locale) ->
+  constructor: (@store, @translationId, @seedLocale, json, @locale) ->
     @paths = []
+    @localeHash = { }
     @walk json
+    @locales = (key for key in Object.keys(@localeHash) when key isnt @seedLocale)
   
   walk: (hash, path) =>
     for key, value of hash
@@ -14,8 +16,13 @@ class PathExtractor
         @addKey keyPath, value
   
   addKey: (path, hash) ->
+    hash = $.extend true, { }, hash
     delete hash.field
-    @paths.push new App.Field
+    @localeHash[key] = true for key, value of hash
+    
+    @paths.push @store.createRecord 'field',
+      id: "#{ @locale or @seedLocale }:#{ path }"
+      translation_id: @translationId
       seedLocale: @seedLocale
       locale: @locale
       path: path

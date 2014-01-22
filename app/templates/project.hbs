@@ -1,11 +1,10 @@
 <div class="projects container">
-  <h1 class="row">{{display_name}}</h1>
+  <h1 class="row">{{model.display_name}}</h1>
+  <div class="locales">
+    {{view Ember.Select content=locales value=currentLocale prompt="Choose a locale" action=changeLocale}}
+  </div>
+  
   {{#each field in model.translation.paths}}
-    <div class="field">
-      <span class="label">{{field.path}}</span><br />
-      original: <span class="english">{{field.seed.text}}</span><br />
-      translated: <span class="translated">{{field.seed.translated}}</span><br />
-      <br />
-    </div>
+    {{render 'field' field}}
   {{/each}}
 </div>
