@@ -4,7 +4,14 @@
     {{view Ember.Select content=locales value=currentLocale prompt="Choose a locale" action=changeLocale}}
   </div>
   
-  {{#each field in model.translation.paths}}
-    {{render 'field' field}}
-  {{/each}}
+  <p>Total: {{model.translation.allFields.length}}</p>
+  <p>Up to date: {{model.translation.upToDateFields.length}}</p>
+  <p>Missing: {{model.translation.missingFields.length}}</p>
+  <p>Out of date: {{model.translation.outOfDateFields.length}}</p>
+  <p>Todo: {{model.translation.todoFields.length}}</p>
+  <p>Progress: {{model.translation.progress}}%</p>
+  
+  {{!-- #each field in model.translation.allFields --}}
+    {{!-- render 'field' field --}}
+  {{!-- /each --}}
 </div>

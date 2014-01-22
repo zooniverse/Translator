@@ -19,14 +19,14 @@ module.exports = App.Field = Ember.Object.extend
     @get('translated')?.version
   ).property('translated')
   
-  missing: (->
+  isMissing: (->
     not @get('translated')
   ).property('translated')
   
-  outOfDate: (->
-    not @get('missing') and @get('seedVersion') > @get('translatedVersion')
-  ).property('missing', 'version', 'translatedVersion')
+  isOutOfDate: (->
+    not @get('isMissing') and @get('seed.version') > @get('translatedVersion')
+  ).property('isMissing', 'seed', 'translatedVersion')
   
-  upToDate: (->
-    not @get('missing') and not @get('outOfDate')
-  ).property('missing', 'outOfDate')
+  isUpToDate: (->
+    not @get('isMissing') and not @get('isOutOfDate')
+  ).property('isMissing', 'isOutOfDate')
