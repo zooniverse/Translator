@@ -1,17 +1,31 @@
-<div class="projects container">
-  <h1 class="row">{{model.display_name}}</h1>
-  <div class="locales">
-    {{view Ember.Select content=locales value=currentLocale prompt="Choose a locale" action=changeLocale}}
+<div class="project container">
+  <div class="header row">
+    <h1>{{model.display_name}}</h1>
+    <div class="locales">
+      {{view Ember.Select content=locales value=currentLocale prompt="Choose a locale" action=changeLocale}}
+    </div>
   </div>
   
-  <p>Total: {{model.translation.allFields.length}}</p>
-  <p>Up to date: {{model.translation.upToDateFields.length}}</p>
-  <p>Missing: {{model.translation.missingFields.length}}</p>
-  <p>Out of date: {{model.translation.outOfDateFields.length}}</p>
-  <p>Todo: {{model.translation.todoFields.length}}</p>
-  <p>Progress: {{model.translation.progress}}%</p>
-  
-  {{!-- #each field in model.translation.allFields --}}
-    {{!-- render 'field' field --}}
-  {{!-- /each --}}
+  <div class="content">
+    <div class="types">
+      {{#if currentLocale}}
+        <h3>Progress: {{model.translation.progress}}%</h3>
+        <ul>
+          <li data-type="all" {{action 'chooseType' 'all'}}>All</li>
+          <li data-type="upToDate" {{action 'chooseType' 'upToDate'}}>Up to date</li>
+          <li data-type="missing" {{action 'chooseType' 'missing'}}>Missing</li>
+          <li data-type="outOfDate" {{action 'chooseType' 'outOfDate'}}>Out of date</li>
+          <li class="active" data-type="todo" {{action 'chooseType' 'todo'}}>Todo</li>
+        </ul>
+      {{/if}}
+    </div>
+    
+    <div class="translation">
+      {{#if currentLocale}}
+        {{#each field in model.translation.selectedFields}}
+          {{render 'field' field}}
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
 </div>

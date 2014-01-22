@@ -1,6 +1,9 @@
 PathExtractor = require '../lib/path_extractor'
 
 App.Translation = Ember.Object.extend
+  init: ->
+    @get 'allFields'
+  
   seedLocale: (->
     @get 'seed_locale'
   ).property('seed_locale')
@@ -27,6 +30,14 @@ App.Translation = Ember.Object.extend
   todoFields: (->
     @get('allFields').filterBy 'isUpToDate', false
   ).property('allFields.@each.isUpToDate')
+  
+  selectedFieldType: (->
+    @getWithDefault 'selectedType', 'todo'
+  ).property('selectedType')
+  
+  selectedFields: (->
+    @get "#{ @get('selectedFieldType') }Fields"
+  ).property('allFields', 'selectedType')
   
   progress: (->
     Math.round 100 * (@get('upToDateFields').length / @get('allFields').length)
