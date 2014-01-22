@@ -1,11 +1,4 @@
-module.exports = App.Field = DS.Model.extend
-  seedLocale: DS.attr()
-  locale: DS.attr()
-  path: DS.attr()
-  translation_id: DS.attr()
-  translations: DS.attr('object')
-  translation: DS.belongsTo('translation')
-  
+module.exports = App.Field = Ember.Object.extend
   locales: (->
     Object.keys @getWithDefault('translations', { })
   ).property('translations')

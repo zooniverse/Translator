@@ -1,4 +1,4 @@
 App.Router.map ->
   @route 'login'
   @resource 'projects'
-  @resource 'project', path: '/projects/:id'
+  @resource 'project', path: '/projects/:name'

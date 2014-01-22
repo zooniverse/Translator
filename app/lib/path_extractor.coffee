@@ -1,7 +1,7 @@
 Field = require '../models/field'
 
 class PathExtractor
-  constructor: (@store, @translationId, @seedLocale, json, @locale) ->
+  constructor: (@seedLocale, json, @locale) ->
     @paths = []
     @localeHash = { }
     @walk json
@@ -20,9 +20,7 @@ class PathExtractor
     delete hash.field
     @localeHash[key] = true for key, value of hash
     
-    @paths.push @store.createRecord 'field',
-      id: "#{ @locale or @seedLocale }:#{ path }"
-      translation_id: @translationId
+    @paths.push Field.create
       seedLocale: @seedLocale
       locale: @locale
       path: path
