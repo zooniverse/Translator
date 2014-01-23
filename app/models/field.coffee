@@ -15,6 +15,20 @@ module.exports = App.Field = Ember.Object.extend
     @get('translations')[@get('locale')]
   ).property('translations', 'locale')
   
+  translatedText: ((key, value) ->
+    if value
+      current = @get 'translated'
+      
+      if current
+        @set "translations.#{ @get('locale') }.text", value
+      else
+        @set "translations.#{ @get('locale') }", { text: value }
+      
+      value
+    else
+      @get 'translated.text'
+  ).property('translated')
+  
   translatedVersion: (->
     @get('translated')?.version
   ).property('translated')

@@ -12,3 +12,12 @@ App.ProjectRoute = AuthenticatedRoute.extend
       project = Project.create resolved.project
       project.set 'translation', Translation.create(resolved.translation)
       project
+  
+  setupController: (controller, project) ->
+    controller.set 'model', project
+    currentLocale = controller.get 'currentLocale'
+    selectedType = controller.getWithDefault 'selectedType', 'todo'
+    
+    controller.set 'selectedType', selectedType
+    controller.set 'model.translation.currentLocale', currentLocale
+    controller.set 'model.translation.selectedType', selectedType

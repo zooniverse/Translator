@@ -13,4 +13,17 @@ module.exports = App.ProjectController = Ember.Controller.extend
     chooseType: (type) ->
       $('.project .types li').removeClass 'active'
       $(".project .types [data-type='#{ type }']").addClass 'active'
+      @set 'selectedType', type
       @get('model.translation').set 'selectedType', type
+    
+    reloadModel: ->
+      @transitionToRoute 'project', @get('model.name')
+    
+    save: (field) ->
+      change =
+        locale: field.get('locale')
+        translation: { }
+      
+      change.translation[field.get('path')] = field.get 'translatedText'
+      zooniverse.api.put("/projects/#{ @get('model.name') }/translations", change).then =>
+        @transitionToRoute 'project', @get('model.name')

@@ -1,6 +1,4 @@
-<span class="label">{{path}}</span><br />
-<span class="english">{{seed.text}}</span><br />
-{{#if locale}}
-  {{textarea value=translated.text rows=3 cols=40}}
-{{/if}}
-<br />
+<span class="label">{{path}}</span>
+<span class="english">{{seed.text}}</span>
+{{textarea valueBinding="translatedText" rows=3 cols=40}}
+<button class="save" {{action "save" this}}>Save</button>

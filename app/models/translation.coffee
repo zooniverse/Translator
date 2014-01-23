@@ -31,12 +31,8 @@ App.Translation = Ember.Object.extend
     @get('allFields').filterBy 'isUpToDate', false
   ).property('allFields.@each.isUpToDate')
   
-  selectedFieldType: (->
-    @getWithDefault 'selectedType', 'todo'
-  ).property('selectedType')
-  
   selectedFields: (->
-    @get "#{ @get('selectedFieldType') }Fields"
+    @get "#{ @get('selectedType') }Fields"
   ).property('allFields', 'selectedType')
   
   progress: (->
