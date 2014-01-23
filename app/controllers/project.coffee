@@ -1,3 +1,5 @@
+Translation = require '../models/translation'
+
 module.exports = App.ProjectController = Ember.Controller.extend
   currentLocale: null
   
@@ -25,5 +27,8 @@ module.exports = App.ProjectController = Ember.Controller.extend
         translation: { }
       
       change.translation[field.get('path')] = field.get 'translatedText'
-      zooniverse.api.put("/projects/#{ @get('model.name') }/translations", change).then =>
-        @transitionToRoute 'project', @get('model.name')
+      zooniverse.api.put("/projects/#{ @get('model.name') }/translations", change).then (json) =>
+        translation = Translation.create json
+        translation.set 'currentLocale', @get('currentLocale')
+        translation.set 'selectedType', @get('selectedType')
+        @set 'model.translation', translation
