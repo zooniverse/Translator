@@ -2,7 +2,20 @@
   <div class="header row">
     <h1>{{model.display_name}}</h1>
     <div class="locales">
-      {{view Ember.Select content=locales value=currentLocale prompt="Choose a locale" action=changeLocale}}
+      <ul>
+        {{#each locale in locales}}
+          <li data-locale="{{locale}}" {{action "changeLocale" locale}}>{{locale}}</li>
+        {{/each}}
+        <li>
+          <span {{bind-attr class=":new-locale isNewLocaleVisible:hidden:visible"}} {{action "toggleNewLocale"}}>New Locale</span>
+          
+          <div {{bind-attr class=":new-locale-form isNewLocaleVisible:visible:hidden"}}>
+            {{input valueBinding="newLocale" placeholder="locale (e.g. en-gb)"}}
+            <button {{action "createNewLocale"}}>Create</button>
+            <button {{action "cancelNewLocale"}}>Cancel</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   

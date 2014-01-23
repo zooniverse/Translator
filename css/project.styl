@@ -2,6 +2,20 @@
   @extend .col-md-12
   @extend .col-sm-12
   
+  ul
+    list-style: none outside none
+    padding-left: 0
+    margin: 0
+    
+    li
+      button()
+      margin-left: 5px
+      line-height: 24px
+      
+      &.active
+        box-shadow: 0 0 0 1px #333333
+        background-color: #A9E79C
+  
   .header
     margin: 20px 0 15px 0
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.13), 0 2px 0 0 rgba(255, 255, 255, 0.87)
@@ -12,10 +26,12 @@
       font-size: 30px
       font-weight: 100
       text-shadow: 0 1px 2px #878787
+      vertical-align: middle
     
     .locales
       display: inline-block
-      margin: 10px
+      margin: 0 10px
+      vertical-align: middle
   
   .content
     @extend .container
@@ -28,19 +44,11 @@
         font-size: 20px
         font-weight: 100
         text-shadow: 0 1px 2px #878787
+        text-align: center
       
-      ul
-        list-style: none outside none
-        padding-left: 0
-        
-        li
-          button()
-          display: block
-          margin-bottom: 20px
-          
-          &.active
-            box-shadow: 0 0 0 1px #333333
-            background-color: #A9E79C
+      ul li
+        display: block
+        margin-bottom: 20px
     
     .translation
       @extend .col-md-10
