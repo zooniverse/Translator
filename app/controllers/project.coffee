@@ -42,6 +42,7 @@ module.exports = App.ProjectController = Ember.Controller.extend
         @set 'currentLocale', newLocale
         @set 'model.translation.locales', locales
         @send 'changeLocale', newLocale
+        @set 'isNewLocaleVisible', false
     
     chooseType: (type) ->
       $('.project .types li').removeClass 'active'
