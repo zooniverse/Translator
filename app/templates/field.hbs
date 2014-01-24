@@ -17,14 +17,14 @@
     <div class="left">
       <div class="label">
         {{path}}
-        {{#if translated.translator}}
-          <span class="translator">Last translated by {{translated.translator}}</span>
-        {{/if}}
       </div>
     </div>
     
     <div class="right">
       <div class="save"><button {{action "save" this}}>Save</button></div>
+      {{#if translated.translator}}
+        <span class="translator">Last translated by {{translated.translator}}</span>
+      {{/if}}
     </div>
   </div>
 </div>
