@@ -1,4 +1,30 @@
-<span class="label">{{path}}</span>
-<span class="english">{{seed.text}}</span>
-{{textarea valueBinding="translatedText" rows=3 cols=40}}
-<button class="save" {{action "save" this}}>Save</button>
+<div class="translation">
+  <div class="top row">
+    <div class="left">
+      <div class="english">
+        {{seed.text}}
+      </div>
+    </div>
+    
+    <div class="right">
+      <div class="translated">
+        {{textarea valueBinding="translatedText" rows=2}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="bottom row">
+    <div class="left">
+      <div class="label">
+        {{path}}
+        {{#if translated.translator}}
+          <span class="translator">Last translated by {{translated.translator}}</span>
+        {{/if}}
+      </div>
+    </div>
+    
+    <div class="right">
+      <div class="save"><button {{action "save" this}}>Save</button></div>
+    </div>
+  </div>
+</div>

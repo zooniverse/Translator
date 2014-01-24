@@ -33,8 +33,9 @@
       {{/if}}
     </div>
     
-    <div class="translation">
+    <div class="translations">
       {{#if currentLocale}}
+        <h3>{{titleize selectedType}}</h3>
         {{#each field in model.translation.selectedFields}}
           {{render 'field' field}}
         {{/each}}
