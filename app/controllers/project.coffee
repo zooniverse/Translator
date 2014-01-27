@@ -3,6 +3,7 @@ Translation = require '../models/translation'
 module.exports = App.ProjectController = Ember.Controller.extend
   currentLocale: null
   isNewLocaleVisible: false
+  message: null
   
   init: ->
     @userDidChange()
@@ -10,6 +11,13 @@ module.exports = App.ProjectController = Ember.Controller.extend
   
   userDidChange: ->
     @set 'currentUser', zooniverse.models.User.current
+  
+  messageDidChange: (->
+    if @get('message')
+      setTimeout =>
+        @set 'message', null
+      , 5000
+  ).observes('message')
   
   deployable: (->
     !!@get('devUser') and !!@get('currentLocale')
@@ -29,8 +37,8 @@ module.exports = App.ProjectController = Ember.Controller.extend
   
   actions:
     deploy: ->
-      zooniverse.api.post "/projects/#{ @get('model.name') }/translations/deploy", locale: @get('currentLocale'), ->
-        alert 'Translation deployed'
+      zooniverse.api.post "/projects/#{ @get('model.name') }/translations/deploy", locale: @get('currentLocale'), =>
+        @set 'message', "Translation deployed"
     
     changeLocale: (locale) ->
       @set 'currentLocale', locale
@@ -54,7 +62,7 @@ module.exports = App.ProjectController = Ember.Controller.extend
       
       isValidLocale = /(^[a-z]{2}$|^[a-z]{2}\-[a-z]{2}$)/.test newLocale
       unless isValidLocale
-        alert "'#{ newLocale }' isn't a valid locale code\nValid formats look like 'en' or 'en-us'"
+        @set 'message', "'#{ newLocale }' isn't a valid locale code\nValid formats look like 'en' or 'en-us'"
         return
       
       if locales.indexOf(newLocale) is -1
