@@ -4,6 +4,22 @@ module.exports = App.ProjectController = Ember.Controller.extend
   currentLocale: null
   isNewLocaleVisible: false
   
+  init: ->
+    @userDidChange()
+    zooniverse.models.User.on 'change', => @userDidChange()
+  
+  userDidChange: ->
+    @set 'currentUser', zooniverse.models.User.current
+  
+  deployable: (->
+    !!@get('devUser') and !!@get('currentLocale')
+  ).property('devUser', 'currentLocale')
+  
+  devUser: (->
+    currentUser = @get 'currentUser'
+    currentUser?.admin or currentUser?.developer
+  ).property('currentUser')
+  
   locales: (->
     currentLocale = @get 'currentLocale'
     locales = @get 'model.translation.locales'
@@ -12,6 +28,10 @@ module.exports = App.ProjectController = Ember.Controller.extend
   ).property('model.translation.locales')
   
   actions:
+    deploy: ->
+      zooniverse.api.post "/projects/#{ @get('model.name') }/translations/deploy", locale: @get('currentLocale'), ->
+        alert 'Translation deployed'
+    
     changeLocale: (locale) ->
       @set 'currentLocale', locale
       @set 'model.translation.currentLocale', locale

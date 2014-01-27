@@ -24,6 +24,9 @@
       {{#if currentLocale}}
         <h3>Progress: {{model.translation.progress}}%</h3>
         <ul>
+          {{#if deployable}}
+            <li class="deploy" {{action 'deploy'}}>Deploy</li>
+          {{/if}}
           <li data-type="all" {{action 'chooseType' 'all'}}>All</li>
           <li data-type="upToDate" {{action 'chooseType' 'upToDate'}}>Up to date</li>
           <li data-type="missing" {{action 'chooseType' 'missing'}}>Missing</li>
