@@ -3,7 +3,7 @@
   
   <div class="list row">
     {{#each model}}
-      <div {{bind-attr class=":project isTranslator::disabled"}}>
+      <div {{bind-attr class=":project isAccessible::disabled"}}>
         {{link-to display_name "project" name classNames="button"}}
       </div>
     {{/each}}
