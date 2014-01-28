@@ -10,7 +10,7 @@
           <span {{bind-attr class=":new-locale isNewLocaleVisible:hidden:visible"}} {{action "toggleNewLocale"}}>New Locale</span>
           
           <div {{bind-attr class=":new-locale-form isNewLocaleVisible:visible:hidden"}}>
-            {{input valueBinding="newLocale" placeholder="locale (e.g. en-gb)"}}
+            {{input valueBinding="newLocale" placeholder="Language name"}}
             <button {{action "cancelNewLocale"}}>Cancel</button>
             
             {{#if localeSearchResults}}
