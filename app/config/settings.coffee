@@ -10,7 +10,7 @@ Settings =
 
 env = if window.location.port is '9295'
   'developmentLocal'
-else if window.location.port > 1024
+else if window.location.port > 1024 or window.location.host is 'demo.zooniverse.org'
   'developmentRemote'
 else
   'production'
