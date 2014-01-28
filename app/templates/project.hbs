@@ -52,9 +52,19 @@
     <div class="translations">
       {{#if currentLocale}}
         <h3>{{titleize selectedType}}</h3>
-        {{#each field in model.translation.selectedFields}}
-          {{render 'field' field}}
-        {{/each}}
+        {{#if model.translation.selectedFields}}
+          {{#each field in model.translation.selectedFields}}
+            {{render 'field' field}}
+          {{/each}}
+        {{else}}
+          <div class="empty">
+            There are no {{downcasedTitle selectedType}} keys
+          </div>
+        {{/if}}
+      {{else}}
+        <div class="empty">
+          Choose a language to start
+        </div>
       {{/if}}
     </div>
   </div>

@@ -24,8 +24,12 @@ module.exports = App.ProjectController = Ember.Controller.extend
     search = @get 'newLocale'
     if search and search.length > 2
       matcher = new RegExp search, 'i'
+      seedLocale = @get 'model.translation.seed_locale'
       @set 'localeSearchResults', zooniverse.util.locales.filter (locale) ->
-        locale.code.match(matcher) or locale.name.match(matcher)
+        if locale.code is seedLocale
+          false
+        else
+          locale.code.match(matcher) or locale.name.match(matcher)
     else
       @set 'localeSearchResults', null
   ).observes('newLocale')
