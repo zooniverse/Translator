@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "haw serve",
-    "stage": "haw build && publisssh build demo.zooniverse.org/translator && rm -rf build"
+    "deploy": "haw build && publisssh build translations.zooniverse.org && rm -rf build"
   },
   "dependencies": {
     "haw": "~0.2.17",
