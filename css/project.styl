@@ -46,20 +46,37 @@
       display: inline-block
       margin: 0 10px
       vertical-align: middle
-  
-  .messages
-    height: 30px
-    
-    .message
-      @extend .col-md-10
-      @extend .col-sm-10
-      @extend .col-md-offset-1
-      @extend .col-sm-offset-1
       
-      height: 30px
-      text-align: center
-      vertical-align: middle
-      white-space: pre-wrap
+      .new-locale-item
+        overflow: visible
+        vertical-align: top
+        position: relative
+        
+        .autocomplete
+          position: absolute
+          top: 37px
+          left: 0
+          z-index: 10
+          padding: 5px
+          background-color: rgba(255, 255, 255, 0.8)
+          box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.13), 0 0 5px 2px rgba(255, 255, 255, 0.87)
+          border-radius: 2px
+          cursor: auto
+          
+          .result
+            display: block
+            margin: 10px 5px
+            cursor: pointer
+  
+  .messages .message
+    @extend .col-md-10
+    @extend .col-sm-10
+    @extend .col-md-offset-1
+    @extend .col-sm-offset-1
+    
+    text-align: center
+    vertical-align: middle
+    white-space: pre-wrap
   
   .content
     @extend .container

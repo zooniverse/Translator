@@ -4,6 +4,7 @@ module.exports = App.ProjectController = Ember.Controller.extend
   currentLocale: null
   isNewLocaleVisible: false
   message: null
+  newLocale: null
   
   init: ->
     @userDidChange()
@@ -18,6 +19,16 @@ module.exports = App.ProjectController = Ember.Controller.extend
         @set 'message', null
       , 5000
   ).observes('message')
+  
+  newLocaleDidChange: (->
+    search = @get 'newLocale'
+    if search and search.length > 2
+      matcher = new RegExp search, 'i'
+      @set 'localeSearchResults', zooniverse.util.locales.filter (locale) ->
+        locale.code.match(matcher) or locale.name.match(matcher)
+    else
+      @set 'localeSearchResults', null
+  ).observes('newLocale')
   
   deployable: (->
     !!@get('devUser') and !!@get('currentLocale')
@@ -37,8 +48,15 @@ module.exports = App.ProjectController = Ember.Controller.extend
   
   actions:
     deploy: ->
+      localeName = zooniverse.util.localeCodes[@get('currentLocale')]
       zooniverse.api.post "/projects/#{ @get('model.name') }/translations/deploy", locale: @get('currentLocale'), =>
-        @set 'message', "Translation deployed"
+        @set 'message', "#{ localeName } was successfully deployed"
+      , =>
+        @set 'message', "There was a problem deploying #{ localeName }.\nTry again in a moment."
+    
+    chooseLocale: (locale) ->
+      @send 'changeLocale', locale
+      @send 'cancelNewLocale'
     
     changeLocale: (locale) ->
       @set 'currentLocale', locale
@@ -54,23 +72,6 @@ module.exports = App.ProjectController = Ember.Controller.extend
     cancelNewLocale: ->
       @set 'newLocale', null
       @set 'isNewLocaleVisible', false
-    
-    createNewLocale: ->
-      newLocale = @get('newLocale').toLowerCase().replace /[_ ]/, '-'
-      @set 'newLocale', null
-      locales = @get 'locales'
-      
-      isValidLocale = /(^[a-z]{2}$|^[a-z]{2}\-[a-z]{2}$)/.test newLocale
-      unless isValidLocale
-        @set 'message', "'#{ newLocale }' isn't a valid locale code\nValid formats look like 'en' or 'en-us'"
-        return
-      
-      if locales.indexOf(newLocale) is -1
-        locales.addObject newLocale
-        @set 'currentLocale', newLocale
-        @set 'model.translation.locales', locales
-        @send 'changeLocale', newLocale
-        @set 'isNewLocaleVisible', false
     
     chooseType: (type) ->
       $('.project .types li').removeClass 'active'

@@ -4,15 +4,24 @@
     <div class="locales">
       <ul>
         {{#each locale in locales}}
-          <li data-locale="{{locale}}" {{action "changeLocale" locale}}>{{locale}}</li>
+          <li data-locale="{{locale}}" {{action "changeLocale" locale}}>{{localeNameOf locale}}</li>
         {{/each}}
-        <li>
+        <li class="new-locale-item">
           <span {{bind-attr class=":new-locale isNewLocaleVisible:hidden:visible"}} {{action "toggleNewLocale"}}>New Locale</span>
           
           <div {{bind-attr class=":new-locale-form isNewLocaleVisible:visible:hidden"}}>
             {{input valueBinding="newLocale" placeholder="locale (e.g. en-gb)"}}
-            <button {{action "createNewLocale"}}>Create</button>
             <button {{action "cancelNewLocale"}}>Cancel</button>
+            
+            {{#if localeSearchResults}}
+              <div class="autocomplete">
+                {{#each result in localeSearchResults}}
+                  <button class="result" {{action "chooseLocale" result.code}}>
+                    <span class="name">{{result.name}}</span>
+                  </button>
+                {{/each}}
+              </div>
+            {{/if}}
           </div>
         </li>
       </ul>
