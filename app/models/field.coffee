@@ -1,4 +1,8 @@
 module.exports = App.Field = Ember.Object.extend
+  locale: (->
+    @get 'projectTranslation.currentLocale'
+  ).property('projectTranslation.currentLocale')
+  
   locales: (->
     Object.keys @getWithDefault('translations', { })
   ).property('translations')

@@ -93,7 +93,5 @@ module.exports = App.ProjectController = Ember.Controller.extend
       
       change.translation[field.get('path')] = field.get 'translatedText'
       zooniverse.api.put("/projects/#{ @get('model.name') }/translations", change).then (json) =>
-        translation = Translation.create json
-        translation.set 'currentLocale', @get('currentLocale')
-        translation.set 'selectedType', @get('selectedType')
-        @set 'model.translation', translation
+        translation = @get 'model.translation'
+        translation.update json
