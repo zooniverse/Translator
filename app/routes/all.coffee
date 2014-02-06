@@ -1,4 +1,5 @@
 require './authenticated'
+require './index'
 require './login'
 require './project'
 require './projects'
