@@ -10,14 +10,14 @@ class PathExtractor
   walk: (hash, path) =>
     for key, value of hash
       keyPath = [path, key].filter((k) -> !!k).join '.'
-      if typeof value is 'object' and not value.field
+      if typeof value is 'object' and not value.__field
         @walk value, keyPath
       else
         @addKey keyPath, value
   
   addKey: (path, hash) ->
     hash = $.extend true, { }, hash
-    delete hash.field
+    delete hash.__field
     @localeHash[key] = true for key, value of hash
     
     @fields.push Field.create
