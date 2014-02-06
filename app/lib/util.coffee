@@ -25,8 +25,8 @@ Utils =
     { code: 'br-fr', name: 'Breton (France)' }
     { code: 'bg', name: 'Bulgarian' }
     { code: 'ca', name: 'Catalan' }
-    { code: 'zh-hans', name: 'Chinese (Simplified)' }
-    { code: 'zh-hant', name: 'Chinese (Traditional)' }
+    { code: 'zh-cn', name: 'Chinese (Simplified)' }
+    { code: 'zh-tw', name: 'Chinese (Traditional)' }
     { code: 'hr', name: 'Croatian' }
     { code: 'cs', name: 'Czech' }
     { code: 'da', name: 'Danish' }
@@ -124,7 +124,7 @@ Utils =
     { code: 'ur', name: 'Urdu' }
     { code: 'uz', name: 'Uzbek' }
     { code: 'vi', name: 'Vietnamese' }
-    { code: 'cy-gb', name: 'Welsh (United Kingdom)' }
+    { code: 'cy', name: 'Welsh' }
     { code: 'wo-sn', name: 'Wolof (Senegal)' }
     { code: 'sah-ru', name: 'Yakut (Russia)' }
     { code: 'ii-cn', name: 'Yi (PRC)' }
