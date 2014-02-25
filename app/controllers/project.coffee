@@ -86,6 +86,10 @@ module.exports = App.ProjectController = Ember.Controller.extend
     reloadModel: ->
       @transitionToRoute 'project', @get('model.name')
     
+    copyText: (field) ->
+      seedLocale = @get 'model.translation.seed_locale'
+      field.set 'translatedText', field.get "translations.#{ seedLocale }.text"
+
     save: (field) ->
       change =
         locale: field.get('locale')
