@@ -63,11 +63,17 @@ module.exports = App.ProjectController = Ember.Controller.extend
       @send 'cancelNewLocale'
     
     changeLocale: (locale) ->
-      @set 'currentLocale', locale
-      @set 'model.translation.currentLocale', locale
-      setTimeout ->
-        $('.project .locales li[data-locale]').removeClass 'active'
-        $(".project .locales li[data-locale='#{ locale }']").addClass 'active'
+      loadingIndicator = new Spinner().spin()
+      document.querySelector('#app').appendChild loadingIndicator.el
+      
+      setTimeout =>
+        @set 'currentLocale', locale
+        @set 'model.translation.currentLocale', locale
+        setTimeout ->
+          loadingIndicator.stop()
+          $('.project .locales li[data-locale]').removeClass 'active'
+          $(".project .locales li[data-locale='#{ locale }']").addClass 'active'
+        , 1
       , 1
     
     toggleNewLocale: ->
