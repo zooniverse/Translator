@@ -6,3 +6,5 @@ Ember.Handlebars.helper 'downcasedTitle', (text) ->
 
 Ember.Handlebars.helper 'localeNameOf', (code) ->
   window.zooniverse.util.localeCodes[code]
+
+window.Spinner = require './spinner'

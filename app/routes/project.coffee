@@ -3,6 +3,13 @@ Project = require '../models/project'
 Translation = require '../models/translation'
 
 App.ProjectRoute = AuthenticatedRoute.extend
+  beforeModel: ->
+    @loadingIndicator = new Spinner().spin()
+    document.querySelector('#app').appendChild @loadingIndicator.el
+    
+  afterModel: ->
+    @loadingIndicator.stop()
+
   model: (params) ->
     promises = Ember.RSVP.hash
       project: zooniverse.api.get("/projects/list/#{ params.name }", with_roles: true)
