@@ -17,7 +17,7 @@ module.exports = App.ProjectController = Ember.Controller.extend
     if @get('message')
       setTimeout =>
         @set 'message', null
-      , 5000
+      , 8000
   ).observes('message')
   
   newLocaleDidChange: (->
@@ -52,9 +52,12 @@ module.exports = App.ProjectController = Ember.Controller.extend
   
   actions:
     deploy: ->
+      deployEndpoint = "/projects/#{ @get('model.name') }/translations/"
+      deployEndpoint += if @get('deployable') then 'deploy' else 'test_deploy'
+
       localeName = zooniverse.util.localeCodes[@get('currentLocale')]
-      zooniverse.api.post "/projects/#{ @get('model.name') }/translations/deploy", locale: @get('currentLocale'), =>
-        @set 'message', "#{ localeName } was successfully deployed"
+      zooniverse.api.post deployEndpoint, locale: @get('currentLocale'), (response) =>
+        @set 'message', "#{ localeName } was successfully deployed. <a href=\"http://#{ @get('model.bucket') }?lang=./#{ @get('model.translation.deploy_path') }/#{ response.locale }.json\" target=\"blank\">View on site here.</a>"
       , =>
         @set 'message', "There was a problem deploying #{ localeName }.\nTry again in a moment."
     
