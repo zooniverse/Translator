@@ -57,7 +57,13 @@ module.exports = App.ProjectController = Ember.Controller.extend
 
       localeName = zooniverse.util.localeCodes[@get('currentLocale')]
       zooniverse.api.post deployEndpoint, locale: @get('currentLocale'), (response) =>
-        @set 'message', "#{ localeName } was successfully deployed. <a href=\"http://#{ @get('model.bucket') }?lang=./#{ @get('model.translation.deploy_path') }/#{ response.locale }.json\" target=\"blank\">View on site here.</a>"
+
+        url = if @get('model.name') is 'galaxy_zoo'
+          "http://#{ @get('model.bucket') }/?lang=#{ response.locale }"
+        else
+          "http://#{ @get('model.bucket') }?lang=./#{ @get('model.translation.deploy_path') }/#{ response.locale }.json"
+
+        @set 'message', "#{ localeName } was successfully deployed. <a href=\"#{ url }\" target=\"blank\">View on site here.</a>"
       , =>
         @set 'message', "There was a problem deploying #{ localeName }.\nTry again in a moment."
     
