@@ -1,11 +1,13 @@
 <div class="projects container">
   <h1 class="row">Translate Projects:</h1>
-  
+  <h4>We rely on volunteer effort to translate Zooniverse projects. If you're able to translate and want to help make one of our projects available in your community, please contact team@zooniverse.org and someone will get in touch.</h4>
   <div class="list row">
     {{#each model}}
+      {{#if isAccessible}}
       <div {{bind-attr class=":project isAccessible::disabled"}}>
         {{link-to display_name "project" name classNames="button"}}
       </div>
+      {{/if}}
     {{/each}}
   </div>
 </div>
