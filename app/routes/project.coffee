@@ -4,12 +4,14 @@ Translation = require '../models/translation'
 
 App.ProjectRoute = AuthenticatedRoute.extend
   beforeModel: ->
-    @loadingIndicator = new Spinner().spin()
-    document.querySelector('#app').appendChild @loadingIndicator.el
-    
+    @_super arguments...
+    if zooniverse.models.User.current
+      @loadingIndicator = new Spinner().spin()
+      document.querySelector('#app').appendChild @loadingIndicator.el
+  
   afterModel: ->
     @loadingIndicator.stop()
-
+  
   model: (params) ->
     promises = Ember.RSVP.hash
       project: zooniverse.api.get("/projects/#{ params.name }", with_roles: true)
