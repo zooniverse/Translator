@@ -12,7 +12,8 @@ App.Project = Ember.Object.extend
   
   userRoles: (->
     user = @get('currentUser')
-    userRoles = @get('roles').filter (role) -> role.name is user.name
+    roles = @get('roles') or []
+    userRoles = roles.filter (role) -> role.name is user.name
     userRoles[0]?.roles or []
   ).property('roles')
   
