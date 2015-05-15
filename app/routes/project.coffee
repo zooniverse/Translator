@@ -9,8 +9,9 @@ App.ProjectRoute = AuthenticatedRoute.extend
       @loadingIndicator = new Spinner().spin()
       document.querySelector('#app').appendChild @loadingIndicator.el
   
-  afterModel: ->
+  afterModel: (project) ->
     @loadingIndicator.stop()
+    @transitionTo('login') unless project.get('isAccessible')
   
   model: (params) ->
     promises = Ember.RSVP.hash
