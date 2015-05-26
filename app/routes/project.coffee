@@ -11,11 +11,11 @@ App.ProjectRoute = AuthenticatedRoute.extend
   
   afterModel: (project) ->
     @loadingIndicator.stop()
-    @transitionTo('login') unless project.get('isAccessible')
+    @transitionTo('projects') unless project.get('isAccessible')
   
   model: (params) ->
     promises = Ember.RSVP.hash
-      project: zooniverse.api.get("/projects/list/#{ params.name }", with_roles: true)
+      project: zooniverse.api.get("/projects/#{ params.name }")
       translation: zooniverse.api.get("/projects/#{ params.name }/translations")
     
     promises.then (resolved) ->

@@ -12,9 +12,8 @@ App.Project = Ember.Object.extend
   
   userRoles: (->
     user = @get('currentUser')
-    roles = @get('roles') or []
-    userRoles = roles.filter (role) -> role.name is user.name
-    userRoles[0]?.roles or []
+    userRoles = user?.talk?.roles or {}
+    userRolesForProject = userRoles[@get('id')] or []
   ).property('roles')
   
   isTranslator: (->
