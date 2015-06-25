@@ -1,7 +1,7 @@
 {
   "name": "Translator",
   "description": "Zooniverse Translations",
-  "author": "Zooniverse <support@zooniverse.org>",
+  "author": "Zooniverse <team@zooniverse.org>",
   "version": "0.0.1",
   "scripts": {
     "start": "haw serve",
